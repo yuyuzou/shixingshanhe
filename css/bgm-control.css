@@ -1,0 +1,27 @@
+/* BGM控制样式 */
+@keyframes rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.rotating {
+  animation: rotate 8s linear infinite;
+  transform-origin: center;
+}
+.global-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.global-icon img {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+}
+.global-icon img.rotating {
+  transform: translate(-50%, -50%) rotate(0deg);
+}

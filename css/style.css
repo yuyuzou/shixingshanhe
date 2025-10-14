@@ -1,0 +1,92 @@
+/* 基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none !important; /* 全局隐藏鼠标图标 */
+}
+
+/* 确保所有元素都继承全局鼠标隐藏设置 */
+body {
+    cursor: none;
+}
+
+/* 确保所有可交互元素也应用鼠标隐藏设置 */
+button,
+a,
+input,
+select,
+textarea,
+[onclick],
+[role="button"],
+[tabindex="0"] {
+    cursor: none !important;
+}
+
+/* 确保滚动条区域也应用鼠标隐藏设置 */
+::-webkit-scrollbar {
+    cursor: none !important;
+}
+
+.page {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.page.active {
+    display: block;
+}
+
+/* 加载页面样式 */
+#loading-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #8b7355 0%, #6b5d45 100%);
+    color: #f5f2e9;
+    text-align: center;
+}
+
+.logo {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.loading-bar {
+    width: 200px;
+    height: 4px;
+    background: rgba(245, 242, 233, 0.3);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.loading-progress {
+    height: 100%;
+    width: 0%;
+    background: #f5f2e9;
+    transition: width 0.3s ease;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+}

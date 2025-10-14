@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>诗行山河 - 跟着诗句游中国</title>
+    <!-- <link
+      href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap"
+      rel="stylesheet"
+    /> -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/map.css" />
+    <link rel="stylesheet" href="css/detail.css" />
+    <link rel="stylesheet" href="css/pop.css" />
+    <link rel="stylesheet" href="css/bgm-control.css" />
+  </head>
+  <body>
+    <!-- 全局水墨风图标和BGM控制 -->
+    <div class="global-icon" id="bgmControl">
+      <img src="images/icon/演出.png" class="BGMon" style="display:none;"></img>
+      <img src="images/icon/演出关闭.png" class="BGMoff" style="display:block;"></img>
+      <audio src="audio/effects/bgm.mp3" loop id="bgm"></audio>
+    </div>
+    
+
+    <!-- BGM控制脚本 -->
+    <script src="js/bgm-control.js"></script>
+    
+    <!-- 毛笔鼠标跟随元素 -->
+    <div id="brush-cursor" style="position: fixed; pointer-events: none; z-index: 9999;">
+      <img src="images/picture/image/毛笔.png" alt="毛笔" style="width: 40px; height: 40px; object-fit: contain;">
+    </div>
+    
+    <!-- 加载页面 -->
+    <!-- <div id="loading-page" class="page active">
+      <div class="logo">诗行山河</div>
+      <div class="subtitle">跟着诗句游中国 · 穿越千年的文化之旅</div>
+      <div class="loading-bar">
+        <div class="loading-progress" id="loading-progress"></div>
+      </div>
+    </div> -->
+    
+    <!-- 模板 -->
+    <template id="poemTemplate">
+      <div class="poem-line"></div>
+    </template>
+    
+    <!-- 首页面 -->
+    <div id="map-page" class="page active">
+      <div class="title-bar">
+        <h1>诗行山河</h1>
+        <img src="images/picture/image/诗词印章.png" alt="">
+      </div>
+      <div class="map-juanzhou">
+        <img src="images/picture/image/卷轴.webp" alt="">
+      </div>
+      <div class="open">
+        <p>点击打开卷轴</p>
+      </div>
+    </div>
+
+    <!-- 诗句选择页面 -->
+    <div id="poem-page" class="page"> 
+      <div class="bg">
+        <img src="images/picture/image/卷轴开.png" alt="">
+      </div>
+      <div class="shiju" id="shijuContainer"></div>
+      <div class="back">
+        <img src="images/picture/image/文字点击底图.png" alt="">
+        <p>点击关闭卷轴</p>
+      </div>
+    </div>
+
+    <!-- 古今对比页 -->
+     <div id="detail-page" class="page">
+      <div class="poemDetail">
+        <div class="back-button" id="backToPoem">
+          <img src="images/picture/image/文字点击底图.png" alt="返回">
+          <p>返回</p>
+        </div>
+        <div class="switch">
+          <img src="images/icon/古今.png" alt="古今">
+          <p class="gujin"></p>
+        </div>
+        <div class="pgUp">
+          <img src="images/icon/左.png" alt="">
+        </div>
+        <div class="pgDown">
+          <img src="images/icon/右.png" alt="">
+        </div>
+        <!-- 背景图片容器 -->
+        <div class="image-container">
+          <img src="" alt="古代图" class="ancient-img">
+          <img src="" alt="现代图" class="modern-img">
+        </div>
+        <div class="leftTop">
+          <div class="title">
+            <!-- 标题文本将通过JavaScript动态插入 -->
+            <div class="poemMusic">
+              <img src="images/icon/诗词静音.png" class="poemOff">
+              <img src="images/icon/诗词声音.png" class="poemOn">
+              <audio src="" id="poemAudio"> </audio>
+            </div>
+          </div>
+          <div class="subTitle"></div>
+          <div class="fullPoem"></div>
+        </div>
+        <div class="leftBottom">
+          <img src="" alt="诗人" class="poet">
+        </div>
+        <div class="rightBottom">
+          <div class="place-bar">
+            <img src="images/picture/image/楼房2.png" alt="" class="building">
+            <span class="placeName"></span>
+          </div>
+          <div class="position"></div>
+          <hr>
+          <div class="story"></div>
+        </div>
+      </div>
+     </div>
+
+     <!-- 景区弹窗 -->
+    <div class="pop">
+      <div class="close">
+        <img src="images/icon/取消.png" alt="" class="closepop">
+      </div>
+      <!-- 内容 -->
+      <div class="place-content">
+        <span class="placeName"></span>
+        <hr>
+        <div class="gushi"></div>
+      </div>
+      <!-- 照片 -->
+      <div class="place-picture">
+        <!-- <p>我去</p> -->
+        <img src="" alt="" class="p1"></img>
+        <img src="" alt="" class="p2"></img>
+        <img src="" alt="" class="p3"></img>
+        <img src="" alt="" class="p4"></img>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- 数据文件 - 直接嵌入JavaScript以避免CORS问题 -->
+    <script src="data/places.js"></script>
+    
+    <!-- <script src="js/utils.js"></script> -->
+    <script src="js/poem.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/poem-music.js"></script>
+  </body>
+</html>

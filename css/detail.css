@@ -1,0 +1,516 @@
+#detail-page {
+  background-color: #f9f4e8;
+  position: relative;
+}
+
+/* 全局水墨风图标 */
+.global-icon {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 60px;
+  height: 60px;
+  z-index: 100;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.global-icon img{
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+  top:50%;
+  left:50%;
+  transform: translate(0, 0);
+}
+
+@font-face {
+    font-family: '汉仪范笑歌隶书繁体';
+    src: url('../images/fonts/汉仪范笑歌隶书繁体.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: '汉仪程行体简';
+    src: url('../images/fonts/汉仪程行体简.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.poemDetail {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景图片容器 */
+.image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.image-container .ancient-img {
+  opacity: 1;
+  z-index: 2;
+}
+
+.image-container .modern-img {
+  opacity: 0;
+  z-index: 1;
+}
+
+.poemDetail.show-modern .image-container .ancient-img {
+  opacity: 0;
+}
+
+.poemDetail.show-modern .image-container .modern-img {
+  opacity: 1;
+}
+
+/* 返回按钮样式 */
+.back-button {
+  position: absolute;
+  top: 20px;
+  right:5%;
+  /* cursor: pointer; */
+  z-index: 10;
+  width:120px;
+  height: 60px;
+  padding: 0;
+}
+
+.back-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  bottom: 0;
+  z-index: 1;
+}
+
+.back-button p {
+  position: absolute;
+  top: 25%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #8b7355;
+  opacity: 0.9;
+  z-index: 10;
+  margin: 0;
+  white-space: nowrap;
+  max-width: 100%;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* 古今按钮切换 */
+.switch{
+  position: absolute;
+  top: 1%;
+  right: 12%;
+  width: 90px;
+  height: 90px;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+}
+
+/* 定义旋转动画 */
+/* @keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
+.switch img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.switch .gujin{
+  position: relative;
+  font-family: '汉仪程行体简';
+  font-weight: 100;
+  font-size:36px;
+  color: black;
+  opacity: 0.9;
+  z-index: 10;
+  margin: 0;
+  top: 50%;
+  left: 20%;
+  transform: translate(0%, -70%);
+  white-space: nowrap;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+  transform-origin: center;
+}
+
+/* .switch .gujin:hover {
+    transform: translate(0%, -70%);
+} */
+
+.switch:hover .gujin {
+  /* transform: scale(1.1); */
+  text-shadow: 0 0 10px #8b7355;
+}
+
+/* 左上角内容 - leftTop */
+.leftTop {
+  position: absolute;
+  top:1.875rem;
+  left: .3rem;
+  width: 60%;
+  padding: 30px;
+  background-color: transparent; /* 透明背景 */
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: slideDown 1s ease-out 0.5s forwards;
+}
+
+/* 为leftTop中的文字添加5px半径的虚化效果 */
+.leftTop * {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+  text-rendering: optimizeLegibility;
+}
+
+.leftTop:hover {
+  z-index: 900;
+}
+
+/* 左下角诗人图片*/
+.leftBottom {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: auto;
+  height: 50vh;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: slideUp 1s ease-out 1.2s forwards;
+}
+
+.leftBottom .poet {
+  width: auto;
+  max-height: 100%;
+}
+
+.leftTop .title {
+  font-family: '汉仪程行体简';
+  font-size: 3.125rem;
+  color:black;
+  margin-bottom: 10px ;
+  text-align: center;
+  line-height: 1;
+}
+
+.leftTop .subTitle {
+  font-family: '汉仪程行体简';
+  font-size: 2.5rem;
+  color: black;
+  margin-bottom: 10px;
+  text-align: center;
+  font-style: italic;
+  line-height: 1;
+}
+
+.leftTop .fullPoem {
+  font-family: '汉仪程行体简';
+  font-size:3.125rem;
+  line-height: 1.2;
+  color:black;
+  text-align: center;
+}
+
+/* 右下角内容 */
+.rightBottom {
+  position: absolute;
+  top:50%;
+  right: 50px;
+  width: 30%;
+  padding: 10px;
+  height: auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); */
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: slideUp 1s ease-out 1s forwards;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.rightBottom .placeName {
+  font-family: '隶书';
+  font-size: 2.5rem;
+  font-weight: bold;
+  /* color: #8b7355; */
+  color: black;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.rightBottom .placeName:hover {
+  color: #8b7355;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+.rightBottom .position {
+  font-family: '楷体';
+  font-size: 1.25rem;
+  color: black;
+  text-align: left;
+}
+
+.rightBottom hr{
+  margin: 10px 0;
+}
+
+.rightBottom .story {
+  font-family: '楷体';
+  font-size: 1.25rem;
+  height: 15rem;
+  line-height: 1.5;
+  color: black;
+  white-space: pre-wrap; /* 保留换行 */
+  text-align: justify;
+  overflow-y: auto;
+}
+
+.place-bar{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.building{
+  width: 2rem;
+  height: 1.5rem;
+  top:10px;
+  left: 0px;
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+hr{
+  border:black 1px solid ;
+}
+/* 从上到下出现的动画 */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 从下到上出现的动画 */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 上下页按钮样式 */
+.pgUp, .pgDown {
+  background-color:rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: .025rem 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 999;
+  width: 30px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.pgUp {
+  left: 5px;
+}
+
+.pgDown {
+  right: 5px;
+}
+
+.pgUp img, .pgDown img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+.pgUp:hover, .pgDown:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* poemMusic 样式 */
+#detail-page .poemDetail .leftTop .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#detail-page .leftTop .title .poemMusic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#detail-page .leftTop .title .poemMusic img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+#detail-page .leftTop .title .poemMusic .poemOn {
+  display: none;
+}
+
+#detail-page .leftTop .title .poemMusic .poemOff {
+  display: inline-block;
+}
+
+#detail-page .leftTop .title .poemMusic:hover img {
+  transform: scale(1.1);
+}
+
+#detail-page .leftTop .title .poemMusic audio {
+  display: none;
+}
+
+/* 标题文本和音频控制的样式调整 */
+#detail-page .leftTop .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#detail-page .leftTop .title .title-text {
+    font-family: "汉仪程行体简";
+    font-size: 3.125rem;
+    color: #000000;
+    text-align: center;
+    margin-right: 10px;
+}
+
+#detail-page .leftTop .title .poemMusic {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+}
+
+#detail-page .leftTop .title .poemMusic:hover {
+    transform: scale(1.1);
+}
+
+#detail-page .leftTop .title .poemMusic img {
+    width: 24px;
+    height: 24px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#detail-page .leftTop .title .poemMusic .poemOn {
+    display: none;
+}
+
+#detail-page .leftTop .title .poemMusic .poemOff {
+    display: inline-block;
+}
+
+#detail-page .leftTop .title .poemMusic audio {
+    display: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .leftTop, .rightBottom {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .leftTop, .rightBottom {
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .leftTop {
+    top: 120px;
+    bottom: auto;
+  }
+  
+  .rightBottom {
+    top: auto;
+    bottom: 50px;
+  }
+  
+  .leftTop .title {
+    font-size: 28px;
+  }
+  
+  .leftTop .subTitle {
+    font-size: 18px;
+  }
+  
+  .leftTop .fullPoem {
+    font-size: 16px;
+  }
+  
+  .rightBottom .placeName {
+    font-size: 22px;
+  }
+}
