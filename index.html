@@ -30,145 +30,43 @@
     <!-- BGM控制脚本 -->
     <script src="js/bgm-control.js"></script>
     
-    <!-- 横屏强制提示层 -->
-    <div id="orientation-prompt" style="
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 99999;
-      font-size: 24px;
-      text-align: center;
-      display: none;
-    ">
-      <div style="transform: rotate(90deg); margin-bottom: 20px;">📱</div>
-      <p>请将设备旋转至横屏模式</p>
-      <p style="font-size: 16px; margin-top: 10px;">以获得最佳体验</p>
-    </div>
-
     <!-- 屏幕方向控制 -->
     <script>
       // 检测设备方向变化
       window.addEventListener('orientationchange', handleOrientationChange);
       window.addEventListener('resize', handleOrientationChange);
-      window.addEventListener('load', handleOrientationChange);
-      
-      // 获取提示元素
-      const orientationPrompt = document.getElementById('orientation-prompt');
       
       function handleOrientationChange() {
+        // 锁定屏幕方向为横屏
+        if (screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock('landscape').catch(function() {
+            // 如果锁定失败，继续提示用户
+            showOrientationPrompt();
+          });
+        } else if (screen.lockOrientation) {
+          screen.lockOrientation('landscape').catch(function() {
+            showOrientationPrompt();
+          });
+        } else {
+          showOrientationPrompt();
+        }
+      }
+      
+      function showOrientationPrompt() {
         // 获取窗口尺寸
         const width = window.innerWidth || document.documentElement.clientWidth;
         const height = window.innerHeight || document.documentElement.clientHeight;
         
         // 检查是否为横屏模式
-        const isLandscape = width > height;
-        
-        // 显示或隐藏提示层
-        if (!isLandscape) {
-          orientationPrompt.style.display = 'flex';
-        } else {
-          orientationPrompt.style.display = 'none';
-        }
-        
-        // 尝试锁定屏幕方向为横屏（支持不同浏览器API）
-        try {
-          if (screen.orientation && screen.orientation.lock) {
-            screen.orientation.lock('landscape');
-          } else if (screen.lockOrientation) {
-            screen.lockOrientation('landscape');
-          } else if (screen.mozLockOrientation) {
-            screen.mozLockOrientation('landscape');
-          } else if (screen.msLockOrientation) {
-            screen.msLockOrientation('landscape');
-          }
-        } catch (e) {
-          // 锁定失败时不做处理，提示层会继续工作
-        }
-        
-        // 强制页面内容旋转和缩放
-        const htmlElement = document.documentElement;
-        const bodyElement = document.body;
-        
-        if (!isLandscape) {
-          // 在竖屏下强制旋转内容
-          htmlElement.style.transform = 'rotate(90deg)';
-          htmlElement.style.transformOrigin = '50% 50%';
-          htmlElement.style.width = height + 'px';
-          htmlElement.style.height = width + 'px';
-          htmlElement.style.overflow = 'hidden';
-          bodyElement.style.width = height + 'px';
-          bodyElement.style.height = width + 'px';
-        } else {
-          // 恢复正常状态
-          htmlElement.style.transform = 'none';
-          htmlElement.style.width = '100%';
-          htmlElement.style.height = '100%';
-          bodyElement.style.width = '100%';
-          bodyElement.style.height = '100%';
+        if (width < height) {
+          // 提示用户旋转设备
+          alert('请将设备旋转至横屏模式以获得最佳体验');
         }
       }
       
-      // 初始化时立即检查方向
-      handleOrientationChange();
+      // 页面加载时检查方向
+      window.addEventListener('load', handleOrientationChange);
     </script>
-    
-    <!-- 强制横屏的CSS -->
-    <style>
-      /* 基础样式设置 */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      
-      html, body {
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-        position: fixed;
-        top: 0;
-        left: 0;
-      }
-      
-      /* 强制横屏布局 */
-      @media screen and (max-width: 768px) and (orientation: portrait) {
-        html {
-          transform: rotate(90deg);
-          transform-origin: 50% 50%;
-          width: 100vh;
-          height: 100vw;
-          overflow: hidden;
-        }
-        
-        body {
-          width: 100vh;
-          height: 100vw;
-          overflow: hidden;
-        }
-      }
-      
-      /* 确保在任何情况下都保持横屏体验 */
-      @media screen and (orientation: portrait) {
-        #orientation-prompt {
-          display: flex !important;
-        }
-      }
-      
-      /* 确保所有页面容器正确显示 */
-      .page {
-        position: relative;
-        width: 100%;
-        height: 100%;
-      }
-    </style>
     
     <!-- 毛笔鼠标跟随元素 -->
     <div id="brush-cursor" style="position: fixed; pointer-events: none; z-index: 9999;">
