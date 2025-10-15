@@ -52,30 +52,94 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // 简化的页面切换功能
+    // 实现加载条动画和页面切换功能
     try {
-        // 直接切换到map-page，不模拟加载过程
-        setTimeout(() => {
-            const loadingPage = document.getElementById('loading-page');
-            const mapPage = document.getElementById('map-page');
+        // 模拟加载过程
+        const loadingProgress = document.getElementById('loading-progress');
+        const loadingPage = document.getElementById('loading-page');
+        const mapPage = document.getElementById('map-page');
+        
+        console.log('初始化页面切换:', {
+            loadingProgress: !!loadingProgress,
+            loadingPage: !!loadingPage,
+            mapPage: !!mapPage
+        });
+        
+        // 确保初始状态正确
+        if (loadingPage) {
+            loadingPage.classList.add('active');
+        }
+        if (mapPage) {
+            mapPage.classList.remove('active');
+        }
+        
+        if (loadingProgress && loadingPage && mapPage) {
+            let progress = 0;
+            const duration = 2000; // 加载动画持续2秒
+            const interval = 30; // 每30毫秒更新一次进度
+            const totalSteps = duration / interval;
+            const increment = 100 / totalSteps;
             
-            if (loadingPage && mapPage) {
-                loadingPage.classList.remove('active');
-                mapPage.classList.add('active');
-                console.log('页面已切换到map-page');
-            } else {
-                console.error('页面元素未找到');
-            }
-            
-            // 尝试调用地图初始化函数
-            if (typeof initMapPoems !== 'undefined') {
-                try {
-                    initMapPoems();
-                } catch (e) {
-                    console.error('初始化地图诗句时出错:', e);
+            // 开始加载动画
+            const loadingInterval = setInterval(() => {
+                progress += increment;
+                // 确保进度不超过100%
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(loadingInterval);
+                    
+                    // 更新到100%进度
+                    loadingProgress.style.width = `${progress}%`;
+                    console.log('加载完成，准备切换页面');
+                    
+                    // 当加载完成后，延迟一小段时间再切换页面
+                    setTimeout(() => {
+                        console.log('执行页面切换');
+                        // 使用更直接的方式切换页面
+                        if (loadingPage) {
+                            loadingPage.style.display = 'none';
+                            loadingPage.classList.remove('active');
+                        }
+                        if (mapPage) {
+                            mapPage.style.display = 'block';
+                            mapPage.classList.add('active');
+                        }
+                        console.log('页面已切换到map-page');
+                        
+                        // 尝试调用地图初始化函数
+                        if (typeof initMapPoems !== 'undefined') {
+                            try {
+                                initMapPoems();
+                            } catch (e) {
+                                console.error('初始化地图诗句时出错:', e);
+                            }
+                        }
+                    }, 300); // 延迟300毫秒切换页面
+                } else {
+                    // 更新加载条宽度
+                    loadingProgress.style.width = `${progress}%`;
                 }
-            }
-        }, 1000); // 1秒后切换页面
+            }, interval);
+        } else {
+            console.error('加载页面元素未找到，使用备用页面切换');
+            // 备用方案：直接切换页面
+            setTimeout(() => {
+                if (loadingPage && mapPage) {
+                    loadingPage.style.display = 'none';
+                    loadingPage.classList.remove('active');
+                    mapPage.style.display = 'block';
+                    mapPage.classList.add('active');
+                    
+                    if (typeof initMapPoems !== 'undefined') {
+                        try {
+                            initMapPoems();
+                        } catch (e) {
+                            console.error('初始化地图诗句时出错:', e);
+                        }
+                    }
+                }
+            }, 1000);
+        }
     } catch (e) {
         console.error('页面切换过程中出错:', e);
     }
@@ -88,7 +152,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (scrollImage && mapPage && poemPage) {
             scrollImage.addEventListener('click', function() {
+                // 使用直接的display属性切换，确保页面正确显示/隐藏
+                mapPage.style.display = 'none';
                 mapPage.classList.remove('active');
+                poemPage.style.display = 'block';
                 poemPage.classList.add('active');
                 console.log('页面已切换到poem-page');
                 
@@ -156,7 +223,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (backElement && mapPage && poemPage) {
             backElement.addEventListener('click', function() {
+                // 使用直接的display属性切换，确保页面正确显示/隐藏
+                poemPage.style.display = 'none';
                 poemPage.classList.remove('active');
+                mapPage.style.display = 'block';
                 mapPage.classList.add('active');
                 console.log('页面已切换到map-page');
             });
@@ -166,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('元素未找到: ' + (!backElement ? 'backElement ' : '') + (!mapPage ? 'mapPage ' : '') + (!poemPage ? 'poemPage' : ''));
         }
     } catch (e) {
-        console.error('初始化毛笔鼠标跟随效果时出错:', e);
+        console.error('添加返回按钮点击事件时出错:', e);
     }
     
     // 为#backToPoem添加点击事件，点击后从detail-page切换回poem-page
@@ -177,7 +247,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (backToPoemButton && detailPage && poemPage) {
             backToPoemButton.addEventListener('click', function() {
+                // 使用直接的display属性切换，确保页面正确显示/隐藏
+                detailPage.style.display = 'none';
                 detailPage.classList.remove('active');
+                poemPage.style.display = 'block';
                 poemPage.classList.add('active');
                 console.log('页面已从detail-page切换回poem-page');
             });

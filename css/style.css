@@ -3,15 +3,21 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none !important; /* 全局隐藏鼠标图标 */
+    /* 移除全局cursor:none，避免阻止点击事件 */
 }
 
-/* 确保所有元素都继承全局鼠标隐藏设置 */
-body {
-    cursor: none;
+/* 确保html和body占满整个视口，解决边缘白边问题 */
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    cursor: default;
+    margin: 0;
+    padding: 0;
+    background: #000; /* 确保背景为黑色 */
 }
 
-/* 确保所有可交互元素也应用鼠标隐藏设置 */
+/* 确保所有可交互元素保留默认点击行为 */
 button,
 a,
 input,
@@ -20,12 +26,12 @@ textarea,
 [onclick],
 [role="button"],
 [tabindex="0"] {
-    cursor: none !important;
+    cursor: pointer !important;
 }
 
-/* 确保滚动条区域也应用鼠标隐藏设置 */
+/* 确保滚动条区域正常工作 */
 ::-webkit-scrollbar {
-    cursor: none !important;
+    cursor: default !important;
 }
 
 .page {
@@ -46,38 +52,56 @@ textarea,
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #8b7355 0%, #6b5d45 100%);
-    color: #f5f2e9;
+    background: linear-gradient(135deg, #fbfeff 0%, #99bac5 50%, #5d6d74 100%); /* 修改为更现代的渐变色 */
+    color: #ffffff;
     text-align: center;
+    font-family: 'Microsoft YaHei', sans-serif;
 }
 
 .logo {
     font-family: 'Ma Shan Zheng', cursive;
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    font-size: 4rem; /* 增大字体 */
+    margin-bottom: 1.5rem;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1s ease-out;
 }
 
 .subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
+    font-size: 1.4rem;
+    margin-bottom: 3rem;
+    opacity: 0.95;
+    letter-spacing: 1px;
+    animation: fadeInUp 1.2s ease-out;
 }
 
 .loading-bar {
-    width: 200px;
-    height: 4px;
-    background: rgba(245, 242, 233, 0.3);
-    border-radius: 2px;
+    width: 300px; /* 加宽加载条 */
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
     overflow: hidden;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .loading-progress {
     height: 100%;
     width: 0%;
-    background: #f5f2e9;
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); /* 添加进度条渐变 */
     transition: width 0.3s ease;
+    border-radius: 3px;
+}
+
+/* 添加动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* 响应式设计 */

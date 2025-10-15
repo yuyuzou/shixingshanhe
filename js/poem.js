@@ -144,7 +144,10 @@ const poemManager = {
                             const detailPage = document.getElementById('detail-page');
                             const poemDetail = document.querySelector('.poemDetail');
                             if (poemPage && detailPage) {
+                                // 使用直接的display属性切换，确保页面正确显示/隐藏
+                                poemPage.style.display = 'none';
                                 poemPage.classList.remove('active');
+                                detailPage.style.display = 'block';
                                 detailPage.classList.add('active');
                         
                                 // 初始化页面内容，确保初次加载时所有数据包括诗人图片都能显示

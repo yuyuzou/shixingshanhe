@@ -31,7 +31,7 @@
     right: 10px;
     width: 3.75rem;
     height: 3.75rem;
-    cursor: pointer;
+    /* cursor: pointer; */
     object-fit: cover;
 }
 
@@ -123,7 +123,7 @@ hr{
 .poemMusic img {
     width: 20px;
     height: 20px;
-    cursor: pointer;
+    /* cursor: pointer; */
     transition: transform 0.2s ease;
 }
 
