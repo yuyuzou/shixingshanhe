@@ -2,7 +2,11 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="x5-orientation" content="landscape" />
+    <meta name="screen-orientation" content="landscape" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="full-screen" content="true" />
     <title>诗行山河 - 跟着诗句游中国</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap"
@@ -25,6 +29,44 @@
 
     <!-- BGM控制脚本 -->
     <script src="js/bgm-control.js"></script>
+    
+    <!-- 屏幕方向控制 -->
+    <script>
+      // 检测设备方向变化
+      window.addEventListener('orientationchange', handleOrientationChange);
+      window.addEventListener('resize', handleOrientationChange);
+      
+      function handleOrientationChange() {
+        // 锁定屏幕方向为横屏
+        if (screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock('landscape').catch(function() {
+            // 如果锁定失败，继续提示用户
+            showOrientationPrompt();
+          });
+        } else if (screen.lockOrientation) {
+          screen.lockOrientation('landscape').catch(function() {
+            showOrientationPrompt();
+          });
+        } else {
+          showOrientationPrompt();
+        }
+      }
+      
+      function showOrientationPrompt() {
+        // 获取窗口尺寸
+        const width = window.innerWidth || document.documentElement.clientWidth;
+        const height = window.innerHeight || document.documentElement.clientHeight;
+        
+        // 检查是否为横屏模式
+        if (width < height) {
+          // 提示用户旋转设备
+          alert('请将设备旋转至横屏模式以获得最佳体验');
+        }
+      }
+      
+      // 页面加载时检查方向
+      window.addEventListener('load', handleOrientationChange);
+    </script>
     
     <!-- 毛笔鼠标跟随元素 -->
     <div id="brush-cursor" style="position: fixed; pointer-events: none; z-index: 9999;">
