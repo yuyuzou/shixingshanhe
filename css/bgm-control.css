@@ -11,11 +11,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  top: 4.5%;
+  right:2%;
+  transform: translate(-50%, -50%);
 }
 .global-icon img {
   position: absolute;
-  width: 60%;
-  height: 60%;
+  width: 2rem;
+  height: 2rem;
   object-fit: contain;
   top: 50%;
   left: 50%;

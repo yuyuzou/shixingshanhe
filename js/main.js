@@ -189,12 +189,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const imgWidth = brushImg.offsetWidth || 40; // 默认宽度（从HTML中获取的近似值）
                 const imgHeight = brushImg.offsetHeight || 40; // 默认高度（从HTML中获取的近似值）
                 
-                // 设置毛笔光标位置，使热点在最左下角
-                // 正确的计算方式：
-                // - 鼠标X坐标直接作为图片左侧位置（使鼠标位于图片左边缘）
-                // - 鼠标Y坐标减去图片高度作为图片顶部位置（使鼠标位于图片下边缘）
-                brushCursor.style.left = e.clientX + 'px'; // 图片左侧对齐鼠标位置
-                brushCursor.style.top = (e.clientY - imgHeight) + 'px'; // 图片底部对齐鼠标位置
+                // 设置毛笔光标位置，确保热点位于毛笔图片的左下角
+                // 正确计算方式：
+                // - 鼠标X坐标作为图片左侧位置（热点位于图片左边缘）
+                // - 鼠标Y坐标作为图片底部位置（热点位于图片下边缘）
+                brushCursor.style.left = e.clientX + 'px'; // 热点位于图片左侧
+                brushCursor.style.top = (e.clientY - imgHeight) + 'px'; // 热点位于图片底部
             });
             
             // 鼠标离开页面时隐藏光标

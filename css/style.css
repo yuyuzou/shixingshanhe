@@ -75,10 +75,10 @@ textarea,
 }
 
 .loading-bar {
-    width: 3.75rem; /* 加宽加载条 */
-    height: 0.075rem;
+    width: 20rem; /* 加宽加载条 */
+    height: 1rem;
     background: rgba(255, 255, 255, 0.2);
-    border-radius: 0.0375rem;
+    border-radius: 5rem;
     overflow: hidden;
     margin-top: 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);

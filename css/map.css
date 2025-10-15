@@ -30,6 +30,7 @@ body{
     position: absolute;
     top: 20%;
     left: 50%;
+    width: 100%;
     transform: translateX(-50%);
     background: rgba(255, 255, 255, 0);
     padding: 0.125rem 0.25rem;
@@ -40,16 +41,22 @@ body{
     font-family: '汉仪范笑歌隶书繁体', cursive;
     font-size: 10rem;
     /* color: #8b7355; */
+    position: absolute;
+    top:20%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    z-index: 99;
     color: #000000;
     /* background-color: #8b7355; */
 }
 
 .title-bar img {
     position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 4rem !important;
-    height: 4rem !important;
+    top: 100%;
+    right: 28%;
+    transform: translate(20%, 150%);
+    width: 4rem;
+    height: 4rem;
     object-fit: contain;
     z-index: 10;
     margin: 0.625rem;
@@ -60,8 +67,8 @@ body{
     top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 15rem !important;
-    height: 100% !important;
+    width: 15rem ;
+    height: 100% ;
 
     justify-content: center;
     align-items: center;
@@ -90,8 +97,8 @@ body{
 }
 
 #poem-page .back{
-  width:3.75rem !important;
-  height: 1.25rem !important;
+  width:3.75rem;
+  height: 1.25rem;
   position: relative;
   top: 9%;
   left: 50%;
@@ -100,18 +107,22 @@ body{
 }
 
 #poem-page .back img{
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: fill;
+    width: 500%;
+    height: 500%;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    transform: translate(-40%, -25%);
+    object-fit:fill;
     bottom: 0;
     z-index: 1;
 }
 
 #poem-page .back p{
     position: absolute;
-    top: 25%;
-    left: 60%;
-    transform: translate(-50%, -50%);
+    top: 0%;
+    left: 10%;
+    transform: translate(-60%, -30%);
     font-family: 'Ma Shan Zheng', cursive;
     font-size: 2rem;
     font-weight: 800;
@@ -125,7 +136,7 @@ body{
 }
 
 #poem-page .back:hover p {
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: translate(-60%, -50%) scale(1.1);
     text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
 }
 
@@ -150,7 +161,7 @@ body{
     position: absolute;
     top: 80%;
     left: 50%;
-    transform: translate(-40%, 50%);
+    transform: translate(-45%, 50%);
 }
 
 .open p{
@@ -191,26 +202,27 @@ body{
   position: absolute;
   top: 2%;
   left: 0;
-  width: 100% !important;
-  height: 82% !important;
+  width: 100%;
+  height: 82%;
   overflow: hidden;
   z-index: 1;
   background-color: rgba(255, 255, 255, 0);
   display: flex;
   align-items: center;
-  padding: 0.1875rem 0 0 0;
+  justify-content: center;
+  padding: 0;
 }
 
-/* 新的静态展示容器 - 居中显示效果 */
+/* 新的静态展示容器 - 平铺满屏幕效果 */
 .shiju-container {
   display: flex !important;
   flex-wrap: wrap !important;
-  justify-content: center !important;
+  justify-content: space-around !important;
   align-items: center !important;
-  width: 100% !important;
+  width: 95% !important;
   height: 100% !important;
-  padding: 0.25rem !important;
-  gap: 10px !important;
+  padding: 0 .5rem !important;
+  gap: 0.5rem !important;
 }
 
 .shiju span {
@@ -228,10 +240,12 @@ body{
   align-items: center !important;
   justify-content: center !important;
   flex-shrink: 0 !important;
-  margin: 0 0.125rem !important; /* 缩小间距 */
-    padding: 0.0625rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
   box-sizing: border-box !important;
   z-index: 1 !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
   /* 使用CSS变量处理垂直位移，与scale效果共存 */
   transform: translateY(var(--vertical-offset, 0px)) !important;
 }
