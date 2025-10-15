@@ -32,7 +32,7 @@ body{
     left: 50%;
     transform: translateX(-50%);
     background: rgba(255, 255, 255, 0);
-    padding: 10px 20px;
+    padding: 0.125rem 0.25rem;
     z-index: 5;
 }
 
@@ -90,8 +90,8 @@ body{
 }
 
 #poem-page .back{
-  width:300px !important;
-  height: 100px !important;
+  width:3.75rem !important;
+  height: 1.25rem !important;
   position: relative;
   top: 9%;
   left: 50%;
@@ -198,7 +198,7 @@ body{
   background-color: rgba(255, 255, 255, 0);
   display: flex;
   align-items: center;
-  padding: 15px 0 0 0;
+  padding: 0.1875rem 0 0 0;
 }
 
 /* 新的静态展示容器 - 居中显示效果 */
@@ -209,7 +209,7 @@ body{
   align-items: center !important;
   width: 100% !important;
   height: 100% !important;
-  padding: 20px !important;
+  padding: 0.25rem !important;
   gap: 10px !important;
 }
 
@@ -228,8 +228,8 @@ body{
   align-items: center !important;
   justify-content: center !important;
   flex-shrink: 0 !important;
-  margin: 0 10px !important; /* 缩小间距 */
-  padding: 5px !important;
+  margin: 0 0.125rem !important; /* 缩小间距 */
+    padding: 0.0625rem !important;
   box-sizing: border-box !important;
   z-index: 1 !important;
   /* 使用CSS变量处理垂直位移，与scale效果共存 */
@@ -259,13 +259,13 @@ body{
     }
     
     .progress {
-        font-size: 12px;
-        padding: 8px 12px;
+        font-size: 0.15rem;
+    padding: 0.1rem 0.15rem;
     }
     
     .marker-icon {
-        width: 30px !important;
-        height: 30px !important;
-        font-size: 14px;
+        width: 0.375rem !important;
+    height: 0.375rem !important;
+    font-size: 0.175rem;
     }
 }

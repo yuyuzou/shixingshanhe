@@ -3,10 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="x5-orientation" content="landscape" />
-    <meta name="screen-orientation" content="landscape" />
+      <meta name="x5-orientation" content="landscape" />
+      <meta name="screen-orientation" content="landscape" />
+
     <meta name="x5-fullscreen" content="true" />
     <meta name="full-screen" content="true" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="MobileOptimized" content="width" />
     <title>诗行山河 - 跟着诗句游中国</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap"
@@ -30,47 +33,147 @@
     <!-- BGM控制脚本 -->
     <script src="js/bgm-control.js"></script>
     
-    <!-- 屏幕方向控制 -->
+    <!-- 响应式横屏设计脚本 -->
     <script>
-      // 检测设备方向变化
-      window.addEventListener('orientationchange', handleOrientationChange);
-      window.addEventListener('resize', handleOrientationChange);
-      
-      function handleOrientationChange() {
-        // 锁定屏幕方向为横屏
+      // 实现电脑端全屏，手机端横屏显示的响应式设计
+      function setupResponsiveLandscape() {
+        // 基础样式设置
+        const container = document.documentElement;
+        const body = document.body;
+        
+        container.style.width = '100%';
+        container.style.height = '100%';
+        body.style.width = '100%';
+        body.style.height = '100%';
+        body.style.margin = '0';
+        body.style.padding = '0';
+        body.style.overflow = 'hidden';
+        
+        // 检查是否已有landscape-container
+        let landscapeContainer = document.getElementById('landscape-container');
+        
+        // 如果容器不存在，创建并移动内容
+        if (!landscapeContainer) {
+          // 创建主容器
+          landscapeContainer = document.createElement('div');
+          landscapeContainer.id = 'landscape-container';
+          
+          // 保存需要移动的元素（跳过当前脚本和已添加的style标签）
+          const elementsToMove = [];
+          const scriptTags = document.querySelectorAll('script');
+          const styleTags = document.querySelectorAll('style');
+          
+          for (let i = 0; i < body.children.length; i++) {
+            const child = body.children[i];
+            // 跳过当前脚本和已经存在的style标签
+            if ((scriptTags && !Array.from(scriptTags).includes(child)) && 
+                (styleTags && !Array.from(styleTags).includes(child))) {
+              elementsToMove.push(child);
+            }
+          }
+          
+          // 将元素移到容器中
+          elementsToMove.forEach(el => landscapeContainer.appendChild(el));
+          
+          // 添加容器到body
+          body.appendChild(landscapeContainer);
+        }
+        
+        // 适配函数
+        function adaptToScreen() {
+          const width = window.innerWidth || document.documentElement.clientWidth;
+          const height = window.innerHeight || document.documentElement.clientHeight;
+          
+          // 判断是否需要横屏显示
+          if (width < height) {
+            // 竖屏设备，强制横屏显示
+            const scale = height / width;
+            landscapeContainer.style.transform = 'rotate(90deg) scale(' + scale + ')';
+            landscapeContainer.style.transformOrigin = 'center center';
+            landscapeContainer.style.position = 'fixed';
+            landscapeContainer.style.top = '50%';
+            landscapeContainer.style.left = '50%';
+            landscapeContainer.style.width = height + 'px';
+            landscapeContainer.style.height = width + 'px';
+            landscapeContainer.style.marginTop = -width / 2 + 'px';
+            landscapeContainer.style.marginLeft = -height / 2 + 'px';
+          } else {
+            // 横屏设备，正常显示
+            landscapeContainer.style.transform = 'none';
+            landscapeContainer.style.position = 'fixed';
+            landscapeContainer.style.top = '0';
+            landscapeContainer.style.left = '0';
+            landscapeContainer.style.width = '100%';
+            landscapeContainer.style.height = '100%';
+            landscapeContainer.style.margin = '0';
+          }
+        }
+        
+        // 监听事件
+        window.addEventListener('resize', adaptToScreen);
+        window.addEventListener('orientationchange', adaptToScreen);
+        
+        // 初始化
+        adaptToScreen();
+        
+        // 尝试锁定屏幕方向
         if (screen.orientation && screen.orientation.lock) {
-          screen.orientation.lock('landscape').catch(function() {
-            // 如果锁定失败，继续提示用户
-            showOrientationPrompt();
+          screen.orientation.lock('landscape').catch(() => {
+            // 锁定失败时，继续使用CSS转换
           });
         } else if (screen.lockOrientation) {
-          screen.lockOrientation('landscape').catch(function() {
-            showOrientationPrompt();
+          screen.lockOrientation('landscape').catch(() => {
+            // 锁定失败时，继续使用CSS转换
           });
-        } else {
-          showOrientationPrompt();
         }
       }
       
-      function showOrientationPrompt() {
-        // 获取窗口尺寸
-        const width = window.innerWidth || document.documentElement.clientWidth;
-        const height = window.innerHeight || document.documentElement.clientHeight;
-        
-        // 检查是否为横屏模式
-        if (width < height) {
-          // 提示用户旋转设备
-          alert('请将设备旋转至横屏模式以获得最佳体验');
-        }
-      }
-      
-      // 页面加载时检查方向
-      window.addEventListener('load', handleOrientationChange);
+      // 页面加载完成后执行
+      window.addEventListener('load', setupResponsiveLandscape);
     </script>
+    
+    <style>
+      /* 基础样式设置 - 电脑端全屏，手机端横屏显示 */
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: fixed;
+      }
+      
+      /* 防止双击缩放 */
+      * {
+        touch-action: manipulation;
+      }
+      
+      /* 页面容器样式 */
+      .page {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+        display: none;
+      }
+      
+      .page.active {
+        display: block;
+      }
+      
+      /* 横屏容器样式 */
+      #landscape-container {
+        transition: transform 0.3s ease;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
     
     <!-- 毛笔鼠标跟随元素 -->
     <div id="brush-cursor" style="position: fixed; pointer-events: none; z-index: 9999;">
-      <img src="images/picture/image/毛笔.png" alt="毛笔" style="width: 40px; height: 40px; object-fit: contain;">
+      <img src="images/picture/image/毛笔.png" alt="毛笔" style="width: 0.5rem; height: 0.5rem; object-fit: contain;">
     </div>
     
     <!-- 加载页面 -->
