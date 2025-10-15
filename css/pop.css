@@ -1,9 +1,9 @@
-@font-face {
-    font-family: '汉仪程行体简';
-    src: url('../images/fonts/汉仪程行体简.TTF') format('truetype');
+/* @font-face {
+    font-family: '行楷';
+    src: url('../images/fonts/行楷.TTF') format('truetype');
     font-weight: normal;
     font-style: normal;
-}
+} */
 
 .pop{
     background: url("../images/picture/image/弹窗背景.png");
@@ -48,7 +48,7 @@
 }
 
 .place-content .placeName{
-    font-family: '汉仪程行体简';
+    font-family: '行楷';
     font-size: 3rem;
     line-height: 1.2;
     /* padding: 2rem 1.5rem 0 1.5rem; */

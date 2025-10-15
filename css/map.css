@@ -5,19 +5,12 @@ body{
     background-color: rgba(255, 255, 255, 1);
 }
 
-@font-face {
-    font-family: '汉仪范笑歌隶书繁体';
-    src: url('../images/fonts/汉仪范笑歌隶书繁体.TTF') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
+/* @font-face {
     font-family: '汉仪程行体简';
     src: url('../images/fonts/汉仪程行体简.TTF') format('truetype');
     font-weight: normal;
     font-style: normal;
-}
+} */
 
 #map-page {
     background: url('../images/picture/image/bg.jpg');
@@ -226,7 +219,7 @@ body{
 }
 
 .shiju span {
-  font-family: '汉仪程行体简', cursive !important;
+  font-family: '行楷', cursive !important;
   font-size: 2rem !important; /* 根据1rem=80px配置，字体大小在120px到160px之间 */
   color: #000000 !important;
   opacity: 0.9 !important;

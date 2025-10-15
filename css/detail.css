@@ -34,12 +34,12 @@
     font-style: normal;
 }
 
-@font-face {
-    font-family: '汉仪程行体简';
-    src: url('../images/fonts/汉仪程行体简.TTF') format('truetype');
+/* @font-face {
+    font-family: '行楷';
+    src: url('../images/fonts/行楷.TTF') format('truetype');
     font-weight: normal;
     font-style: normal;
-}
+} */
 
 .poemDetail {
   width: 100%;
@@ -160,7 +160,7 @@
 
 .switch .gujin{
   position: relative;
-  font-family: '汉仪程行体简';
+  font-family: '行楷';
   font-weight: 100;
   font-size: 2rem;
   color: black;
@@ -227,7 +227,7 @@
 }
 
 .leftTop .title {
-  font-family: '汉仪程行体简';
+  font-family: '行楷';
   font-size: 3.125rem;
   color:black;
   margin-bottom: 0.125rem ;
@@ -236,7 +236,7 @@
 }
 
 .leftTop .subTitle {
-  font-family: '汉仪程行体简';
+  font-family: '行楷';
   font-size: 2.5rem;
   color: black;
   margin-bottom: 0.125rem;
@@ -246,7 +246,7 @@
 }
 
 .leftTop .fullPoem {
-  font-family: '汉仪程行体简';
+  font-family: '行楷';
   font-size:3.125rem;
   line-height: 1.2;
   color:black;
@@ -438,7 +438,7 @@ hr{
 }
 
 #detail-page .leftTop .title .title-text {
-    font-family: "汉仪程行体简";
+    font-family: "行楷";
     font-size: 3.125rem;
     color: #000000;
     text-align: center;
